@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Project_MVC_MCC75.Contexts;
+using Project_MVC_MCC75.Repositories;
+using Project_MVC_MCC75.ViewModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,10 @@ builder.Services.AddControllersWithViews();
 //configure context to sql server database
 var connectionString = builder.Configuration.GetConnectionString("Connection");//mengambil koneksi string "Connection" dari appjson
 builder.Services.AddDbContext<MyContext>(options => options.UseSqlServer(connectionString));//mendaftarkan bahwa kita mendaftarkan mycontext ke connection string
+
+//Dependency Injection
+builder.Services.AddScoped<UniversityRepository>();
+builder.Services.AddScoped<EducationRepository>();
 
 var app = builder.Build();
 

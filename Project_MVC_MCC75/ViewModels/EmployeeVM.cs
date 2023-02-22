@@ -13,6 +13,7 @@ public class EmployeeVM
     [Required(ErrorMessage = "First Name Must Be Filled")]
     public string FirstName { get; set; }
     [Display(Name ="Last Name")]
+    [Required(ErrorMessage = "Last Name Must Be Filled")]
     public string? LastName { get; set; }
     [Display(Name = "Birth Date")]
     [Required(ErrorMessage = "Birth Date Must Be Filled")]

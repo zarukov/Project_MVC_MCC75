@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Project_MVC_MCC75.ViewModels;
 
-public class EducationVM
+public class EducationUniversityVM
 {
     public int Id { get; set; }
     public string Major { get; set; }
