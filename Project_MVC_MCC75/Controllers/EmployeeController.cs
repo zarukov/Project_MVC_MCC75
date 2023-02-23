@@ -98,6 +98,6 @@ public class EmployeeController : Controller
         {
             return RedirectToAction(nameof(Index));
         }
-        return RedirectToAction(nameof(Delete));
+        return View();
     }
 }
