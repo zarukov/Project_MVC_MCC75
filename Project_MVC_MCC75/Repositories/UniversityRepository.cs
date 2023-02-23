@@ -14,32 +14,6 @@ public class UniversityRepository : IRepository<int, University>
         this.context = context;
     }
 
-    public int Delete(int key)
-    {
-        int result = 0;//menampung data result
-        var university = GetById(key);
-        if (university == null)
-        {
-           return result;
-        }
-
-        context.Remove(university);
-        result = context.SaveChanges();
-
-        return result;
-       
-    }
-
-    public List<University> GetAll()
-    {
-        return context.Universities.ToList() ?? null;
-    }
-
-    public University GetById(int key)
-    {
-        return context.Universities.Find(key) ?? null;
-    }
-
     public int Insert(University entity)
     {
         int result = 0;
@@ -49,12 +23,38 @@ public class UniversityRepository : IRepository<int, University>
         return result;
     }
 
+    public List<University> GetAll()
+    {
+        return context.Universities.ToList() ?? null;//kenapa ?? null
+    }
+
+    public University GetById(int key)
+    {
+        return context.Universities.Find(key) ?? null;//kenapa ?? null
+    }
+
     public int Update(University entity)
     {
         int result = 0;
-        context.Entry(entity).State = EntityState.Modified;
+        context.Entry(entity).State = EntityState.Modified;//syntax untuk memodifikasi (atau update/edit) sebuah data
         result = context.SaveChanges();
 
         return result;
+    }
+
+    public int Delete(int key)
+    {
+        int result = 0;//menampung data result
+        var university = GetById(key);
+        if (university == null)
+        {
+            return result;
+        }
+
+        context.Remove(university);
+        result = context.SaveChanges();
+
+        return result;
+
     }
 }

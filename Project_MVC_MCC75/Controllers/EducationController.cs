@@ -78,15 +78,15 @@ public class EducationController : Controller
     }
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Edit(EducationUniversityVM education)
+    public IActionResult Edit(EducationUniversityVM educationUnivVM)
     {
         var result = educationRepository.Update(new Education
         {
-            Id = education.Id,
-            Degree = education.Degree,
-            GPA = education.GPA,
-            Major = education.Major,
-            UniversityId = Convert.ToInt16(education.UniversityName)
+            Id = educationUnivVM.Id,
+            Degree = educationUnivVM.Degree,
+            GPA = educationUnivVM.GPA,
+            Major = educationUnivVM.Major,
+            UniversityId = Convert.ToInt16(educationUnivVM.UniversityName)
         });
         if (result > 0)
         {

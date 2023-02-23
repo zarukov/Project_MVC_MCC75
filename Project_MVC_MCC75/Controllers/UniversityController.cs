@@ -8,20 +8,21 @@ using Project_MVC_MCC75.Repositories;
 namespace Project_MVC_MCC75.Controllers;
 public class UniversityController : Controller
 {
-    private readonly UniversityRepository repository;
+    private readonly UniversityRepository universityRepository;
 
-    public UniversityController(MyContext context, UniversityRepository repository)
+    public UniversityController(UniversityRepository repository)
     {
-        this.repository = repository;
+        this.universityRepository = repository;
     }
+
     public IActionResult Index()
     {
-        var universities = repository.GetAll();
+        var universities = universityRepository.GetAll();
         return View(universities);
     }
     public IActionResult Details(int id)
     {
-        var university = repository.GetById(id);
+        var university = universityRepository.GetById(id);
         return View(university);
     }
 
@@ -34,7 +35,7 @@ public class UniversityController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Create(University university)
     {
-        var result = repository.Insert(university);
+        var result = universityRepository.Insert(university);
         if (result > 0)
         {
             return RedirectToAction(nameof(Index));
@@ -45,7 +46,7 @@ public class UniversityController : Controller
 
     public IActionResult Edit(int id)
     {
-        var university = repository.GetById(id);
+        var university = universityRepository.GetById(id);
         return View(university);
     }
     [HttpPost]
@@ -53,7 +54,7 @@ public class UniversityController : Controller
     public IActionResult Edit(University university)
     {
         
-        var result = repository.Update(university);
+        var result = universityRepository.Update(university);
         if (result > 0)
         {
             return RedirectToAction(nameof(Index));
@@ -64,14 +65,14 @@ public class UniversityController : Controller
 
     public IActionResult Delete(int id)
     {
-        var university = repository.GetById(id);
+        var university = universityRepository.GetById(id);
         return View(university);
     }
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult Remove(int id)
     {
-        var result = repository.Delete(id);
+        var result = universityRepository.Delete(id);
         if (result == 0)
         {
             //Data tidak ditemukan
