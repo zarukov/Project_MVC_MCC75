@@ -42,6 +42,10 @@ public class EmployeeController : Controller
 
     public IActionResult Index()
     {
+        if (HttpContext.Session.GetString("role") != "Admin")
+        {
+            return RedirectToAction("Unauthorized", "Error");
+        }
         var results = employeeRepository.GetAllEmployee();
         return View(results);
     }

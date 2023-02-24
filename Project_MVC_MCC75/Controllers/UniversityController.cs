@@ -29,12 +29,20 @@ public class UniversityController : Controller
 
     public IActionResult Create()
     {
+        if (HttpContext.Session.GetString("role") != "Admin")
+        {
+            return RedirectToAction("Unauthorized", "Error");
+        }
         return View();
     }
     [HttpPost]
     [ValidateAntiForgeryToken]
     public IActionResult Create(University university)
     {
+        if (HttpContext.Session.GetString("role") != "Admin")
+        {
+            return RedirectToAction("Unauthorized", "Error");
+        }
         var result = universityRepository.Insert(university);
         if (result > 0)
         {
@@ -46,6 +54,10 @@ public class UniversityController : Controller
 
     public IActionResult Edit(int id)
     {
+        if (HttpContext.Session.GetString("role") != "Admin")
+        {
+            return RedirectToAction("Unauthorized", "Error");
+        }
         var university = universityRepository.GetById(id);
         return View(university);
     }
@@ -53,7 +65,10 @@ public class UniversityController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Edit(University university)
     {
-        
+        if (HttpContext.Session.GetString("role") != "Admin")
+        {
+            return RedirectToAction("Unauthorized", "Error");
+        }
         var result = universityRepository.Update(university);
         if (result > 0)
         {
@@ -65,6 +80,10 @@ public class UniversityController : Controller
 
     public IActionResult Delete(int id)
     {
+        if (HttpContext.Session.GetString("role") != "Admin")
+        {
+            return RedirectToAction("Unauthorized", "Error");
+        }
         var university = universityRepository.GetById(id);
         return View(university);
     }
@@ -72,6 +91,10 @@ public class UniversityController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Remove(int id)
     {
+        if (HttpContext.Session.GetString("role") != "Admin")
+        {
+            return RedirectToAction("Unauthorized", "Error");
+        }
         var result = universityRepository.Delete(id);
         if (result == 0)
         {

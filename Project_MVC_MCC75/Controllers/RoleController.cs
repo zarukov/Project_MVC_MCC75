@@ -30,6 +30,10 @@ public class RoleController : Controller
 
     public IActionResult Index()
     {
+        if (HttpContext.Session.GetString("role") != "Admin")
+        {
+            return RedirectToAction("Unauthorized", "Error");
+        }
         var result = roleRepository.GetAll();
         return View(result);
     }

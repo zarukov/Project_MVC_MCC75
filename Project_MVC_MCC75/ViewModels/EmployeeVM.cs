@@ -13,7 +13,6 @@ public class EmployeeVM
     [Required(ErrorMessage = "First Name Must Be Filled")]
     public string FirstName { get; set; }
     [Display(Name ="Last Name")]
-    [Required(ErrorMessage = "Last Name Must Be Filled")]
     public string? LastName { get; set; }
     [Display(Name = "Birth Date")]
     [Required(ErrorMessage = "Birth Date Must Be Filled")]
@@ -27,6 +26,7 @@ public class EmployeeVM
     public string Email { get; set; }
     [Display(Name = "Phone Number")]
     public string? PhoneNumber { get; set; }
+    public string Role { get; set; }
 }
 public enum GenderEnum
 {

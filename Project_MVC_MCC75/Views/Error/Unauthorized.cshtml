@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    Layout = null;
+}
+
+<h1>UNAUTHORIZED</h1>
+<h3>You don't have a valid credential. Please contact the administrator.</h3>
+
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+    @*Javascript*@
+    <div id="counter">5</div>
+    <script>
+        setInterval(function () {
+            var div = document.querySelector("#counter");
+            var count = div.textContent * 1 - 1;
+            div.textContent = count;
+            if (count <= 0) {
+                window.location.replace("Home");
+            }
+        }, 1000);
+    </script>
+
+</body>
+
+</html>

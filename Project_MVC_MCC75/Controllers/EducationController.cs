@@ -22,6 +22,10 @@ public class EducationController : Controller
     
     public IActionResult Create()
     {
+        if (HttpContext.Session.GetString("role") != "Admin")
+        {
+            return RedirectToAction("Unauthorized", "Error");
+        }
         var universities = universityRepository.GetAll()
             .Select(u => new SelectListItem
             {
@@ -35,6 +39,10 @@ public class EducationController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Create(EducationUniversityVM education)
     {
+        if (HttpContext.Session.GetString("role") != "Admin")
+        {
+            return RedirectToAction("Unauthorized", "Error");
+        }
         string addComma = education.GPA.ToString().Insert(1, ",");
         double changeToDouble = Convert.ToDouble(addComma);
         education.GPA = (float) changeToDouble;
@@ -67,6 +75,10 @@ public class EducationController : Controller
 
     public IActionResult Edit(int id)
     {
+        if (HttpContext.Session.GetString("role") != "Admin")
+        {
+            return RedirectToAction("Unauthorized", "Error");
+        }
         var universities = universityRepository.GetAll()
             .Select(u => new SelectListItem
             {
@@ -80,6 +92,10 @@ public class EducationController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Edit(EducationUniversityVM educationUnivVM)
     {
+        if (HttpContext.Session.GetString("role") != "Admin")
+        {
+            return RedirectToAction("Unauthorized", "Error");
+        }
         var result = educationRepository.Update(new Education
         {
             Id = educationUnivVM.Id,
@@ -98,6 +114,10 @@ public class EducationController : Controller
 
     public IActionResult Delete(int id)
     {
+        if (HttpContext.Session.GetString("role") != "Admin")
+        {
+            return RedirectToAction("Unauthorized", "Error");
+        }
         var education = educationRepository.GetByIdEducationUniversity(id);
         return View(education);
     }
@@ -105,6 +125,10 @@ public class EducationController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Remove(int id)
     {
+        if (HttpContext.Session.GetString("role") != "Admin")
+        {
+            return RedirectToAction("Unauthorized", "Error");
+        }
         var result = educationRepository.Delete(id);
         if (result == 0)
         {
