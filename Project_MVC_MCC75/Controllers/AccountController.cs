@@ -1,21 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Project_MVC_MCC75.Contexts;
 using Project_MVC_MCC75.Models;
 using Project_MVC_MCC75.Repositories;
 using Project_MVC_MCC75.ViewModels;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace MCC75NET.Controllers;
 public class AccountController : Controller
 {
     private readonly MyContext context;
     private readonly AccountRepository accountRepository;
+    private readonly IConfiguration configuration;
 
-    public AccountController(MyContext context, AccountRepository accountRepository)
+    public AccountController(MyContext context, AccountRepository accountRepository, IConfiguration configuration)
     {
         this.context = context;
         this.accountRepository = accountRepository;
+        this.configuration = configuration;
     }
     public IActionResult Index()
     {
@@ -118,11 +125,35 @@ public class AccountController : Controller
         {
             var userdata = accountRepository.GetUserdataVM(loginVM.Email);
 
-            HttpContext.Session.SetString("email", userdata.Email);
+            /*HttpContext.Session.SetString("email", userdata.Email);
             HttpContext.Session.SetString("fullname", userdata.FullName);
-            HttpContext.Session.SetString("role", userdata.Role);
+            HttpContext.Session.SetString("role", userdata.Role);*/
+            var roles = accountRepository.GetRolesByNIK(loginVM.Email);
+            var claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.Email, userdata.Email),
+                new Claim(ClaimTypes.Name, userdata.FullName)
+            };
 
-            return RedirectToAction("Index","Home");
+            foreach(var item in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role,item));
+            }
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]));
+            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                issuer: configuration["JWT:Issuer"],
+                audience: configuration["JWT:Audience"],
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(5),
+                signingCredentials: signIn
+                );
+
+            var generateToken =  new JwtSecurityTokenHandler().WriteToken(token);
+
+            HttpContext.Session.SetString("jwtoken", generateToken);
+            return RedirectToAction(nameof(Index),"Home");
         }
         ModelState.AddModelError(string.Empty, "Email or Password Not Found. Please Try Again.");
         return View();

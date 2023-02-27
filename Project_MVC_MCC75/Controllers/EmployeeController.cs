@@ -5,8 +5,12 @@ using Project_MVC_MCC75.Contexts;
 using Project_MVC_MCC75.Models;
 using Project_MVC_MCC75.Repositories;
 using Project_MVC_MCC75.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace MCC75NET.Controllers;
+
+[Authorize]
 public class EmployeeController : Controller
 {
     private readonly EmployeeRepository employeeRepository;
@@ -15,6 +19,8 @@ public class EmployeeController : Controller
     {
         this.employeeRepository = employeeRepository;
     }
+
+    [Authorize(Roles="Admin")]
     public IActionResult Create()
     {
         var employees = employeeRepository.GetAll();

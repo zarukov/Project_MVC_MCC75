@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "v75B1LFEgLGDP6zEfwdcZLtIbr5D9Nldmd9bV8n3UA0etV/9yBt2BVqVH4rdnEJGEU4+rzr8o0VTx36v144Hdw==",
+  "dgSpecHash": "ADgno7ZC1MsnrNHKrNhox/KF3ynGLh2m2gGnxU1EOLK5opeXErU9TTSnf0DMuPdpdWzZ8MorbNFUSRccUQAIoQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\GAMING 3\\source\\repos\\Project_MVC_MCC75\\Project_MVC_MCC75\\Project_MVC_MCC75.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\GAMING 3\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\GAMING 3\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\GAMING 3\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",
+    "C:\\Users\\GAMING 3\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.14\\microsoft.aspnetcore.authentication.jwtbearer.6.0.14.nupkg.sha512",
     "C:\\Users\\GAMING 3\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\6.0.0\\microsoft.aspnetcore.razor.language.6.0.0.nupkg.sha512",
     "C:\\Users\\GAMING 3\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
     "C:\\Users\\GAMING 3\\.nuget\\packages\\microsoft.build\\17.3.2\\microsoft.build.17.3.2.nupkg.sha512",
