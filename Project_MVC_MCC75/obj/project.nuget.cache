@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ADgno7ZC1MsnrNHKrNhox/KF3ynGLh2m2gGnxU1EOLK5opeXErU9TTSnf0DMuPdpdWzZ8MorbNFUSRccUQAIoQ==",
+  "dgSpecHash": "O4jA99zA7rCF5BwFgZwXVQmJPHLRWAmtP8ixZZhI1cgzLEzIRCW3tSv70j4wL78AKh+EYiuzTadvZRwC3EPhQQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\GAMING 3\\source\\repos\\Project_MVC_MCC75\\Project_MVC_MCC75\\Project_MVC_MCC75.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\GAMING 3\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\GAMING 3\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\GAMING 3\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\GAMING 3\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\GAMING 3\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\GAMING 3\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",

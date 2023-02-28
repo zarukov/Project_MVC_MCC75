@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Project_MVC_MCC75.Contexts;
+using Project_MVC_MCC75.Handler;
 using Project_MVC_MCC75.Models;
 using Project_MVC_MCC75.Repositories.Interface;
 using Project_MVC_MCC75.ViewModels;
@@ -11,12 +12,13 @@ public class AccountRepository :IRepository<int, Account>
     private readonly MyContext context;
     private readonly EmployeeRepository employeeRepository;
     private readonly UniversityRepository universityRepository;
-
+    
     public AccountRepository(MyContext context, EmployeeRepository employeeRepository, UniversityRepository universityRepository)
 	{
         this.context = context;
         this.employeeRepository = employeeRepository;
         this.universityRepository = universityRepository;
+        
     }
 
     public int Insert(Account entity)
@@ -39,7 +41,7 @@ public class AccountRepository :IRepository<int, Account>
         throw new NotImplementedException();
     }
 
-    public int Register(RegisterVM registerVM)
+    public int Register(RegisterVM registerVM, Hashing hashing)
     {
         int result = 0;
         // Bikin kondisi untuk mengecek apakah data university sudah ada
@@ -86,7 +88,7 @@ public class AccountRepository :IRepository<int, Account>
         Account account = new Account
         {
             EmployeeNIK = registerVM.NIK,
-            Password = registerVM.Password
+            Password = Hashing.HashPassword(registerVM.Password),
         };
         context.Accounts.Add(account);
         context.SaveChanges();
@@ -121,9 +123,13 @@ public class AccountRepository :IRepository<int, Account>
             {
                 Email = e.Email,
                 Password = a.Password
-            });
+            }).FirstOrDefault(a => a.Email == loginVM.Email);
     
-        return result.Any(e => e.Email == loginVM.Email && e.Password == loginVM.Password);
+        if(result == null)
+        {
+            return false;
+        }
+        return Hashing.ValidatePassword(loginVM.Password, result.Password);
     }
 
     public UserdataVM GetUserdataVM(string email)

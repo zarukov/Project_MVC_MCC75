@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Core.Types;
 using Project_MVC_MCC75.Contexts;
@@ -6,6 +7,7 @@ using Project_MVC_MCC75.Models;
 using Project_MVC_MCC75.Repositories;
 
 namespace Project_MVC_MCC75.Controllers;
+[Authorize]
 public class UniversityController : Controller
 {
     private readonly UniversityRepository universityRepository;
@@ -15,6 +17,7 @@ public class UniversityController : Controller
         this.universityRepository = repository;
     }
 
+    [Authorize]
     public IActionResult Index()
     {
         var universities = universityRepository.GetAll();

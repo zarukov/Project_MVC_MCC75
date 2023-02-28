@@ -577,3 +577,4 @@ C:\Users\GAMING 3\source\repos\Project_MVC_MCC75\Project_MVC_MCC75\obj\Debug\net
 C:\Users\GAMING 3\source\repos\Project_MVC_MCC75\Project_MVC_MCC75\obj\Debug\net6.0\Project_MVC_MCC75.genruntimeconfig.cache
 C:\Users\GAMING 3\source\repos\Project_MVC_MCC75\Project_MVC_MCC75\obj\Debug\net6.0\ref\Project_MVC_MCC75.dll
 C:\Users\GAMING 3\source\repos\Project_MVC_MCC75\Project_MVC_MCC75\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\GAMING 3\source\repos\Project_MVC_MCC75\Project_MVC_MCC75\bin\Debug\net6.0\BCrypt.Net-Next.dll

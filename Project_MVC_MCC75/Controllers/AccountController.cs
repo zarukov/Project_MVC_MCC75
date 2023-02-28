@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Project_MVC_MCC75.Contexts;
+using Project_MVC_MCC75.Handler;
 using Project_MVC_MCC75.Models;
 using Project_MVC_MCC75.Repositories;
 using Project_MVC_MCC75.ViewModels;
@@ -12,6 +13,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 namespace MCC75NET.Controllers;
+
 public class AccountController : Controller
 {
     private readonly MyContext context;
@@ -96,12 +98,12 @@ public class AccountController : Controller
     // POST : Account/Register
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Register(RegisterVM registerVM)
+    public IActionResult Register(RegisterVM registerVM, Hashing hashing)
     {
         if (ModelState.IsValid)
         {
             // Bikin kondisi untuk mengecek apakah data university sudah ada
-            var result = accountRepository.Register(registerVM);
+            var result = accountRepository.Register(registerVM, hashing);
             if(result == 0)
             {
                 return RedirectToAction("Index", "Home");

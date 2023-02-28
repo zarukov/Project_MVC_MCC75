@@ -26,9 +26,10 @@ builder.Services.AddSession(options =>
 //Dependency Injection
 builder.Services.AddScoped<UniversityRepository>();
 builder.Services.AddScoped<EducationRepository>();
+builder.Services.AddScoped<AccountRepository>();
 builder.Services.AddScoped<EmployeeRepository>();
 builder.Services.AddScoped<RoleRepository>();
-builder.Services.AddScoped<AccountRepository>();
+
 
 //JWT Configuration
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -71,6 +72,7 @@ app.UseStatusCodePages(async context =>
 {
     var response = context.HttpContext.Response;
 
+    app.UseAuthorization();
     if (response.StatusCode.Equals((int)HttpStatusCode.Unauthorized))
     {
         response.Redirect("/Unauthorized");
@@ -81,14 +83,13 @@ app.UseStatusCodePages(async context =>
     }
 });
 
-
 app.UseSession();
 app.Use(async (context, next) =>
 {
     var jwtoken = context.Session.GetString("jwtoken");
     if (!string.IsNullOrEmpty(jwtoken))
     {
-        context.Request.Headers.Add("Authorization", "Bearer" + jwtoken);
+        context.Request.Headers.Add("Authorization", "Bearer " + jwtoken);
     }
     await next();
 });
